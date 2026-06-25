@@ -1,0 +1,26 @@
+[Unit]
+Description=SmartCash 3.0.0 SmardNode daemon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=smartcash
+Group=smartcash
+Type=forking
+PIDFile=/run/smartcash3/smartcashd.pid
+ExecStart=/usr/local/bin/smartcashd -conf=/etc/smartcash3/smartcash.conf -datadir=/var/lib/smartcash3 -pid=/run/smartcash3/smartcashd.pid
+ExecStop=/usr/local/bin/smartcash-cli -conf=/etc/smartcash3/smartcash.conf -datadir=/var/lib/smartcash3 stop
+RuntimeDirectory=smartcash3
+RuntimeDirectoryMode=0755
+Restart=always
+RestartSec=15
+TimeoutStartSec=600
+TimeoutStopSec=120
+PrivateTmp=true
+NoNewPrivileges=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/smartcash3 /run
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

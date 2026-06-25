@@ -1,0 +1,11 @@
+[Unit]
+Description=SmardNode block producer timer
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=55s
+AccuracySec=1s
+Unit=smardnode-miner.service
+
+[Install]
+WantedBy=timers.target
